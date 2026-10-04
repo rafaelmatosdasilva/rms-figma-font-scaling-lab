@@ -213,26 +213,6 @@
     margin: 0 0 var(--gap-s) 0;
     font-weight: var(--m-weight);
   }
-  .details-row {
-    display: flex; justify-content: space-between; gap: var(--gap-m);
-    padding: var(--padding-xxs) 0;
-    font-size: var(--m-size);
-    line-height: 1.45;
-  }
-  .details-row .label { color: var(--text-muted); flex-shrink: 0; }
-  .details-row .value {
-    color: var(--text);
-    text-align: right;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    min-width: 0;
-  }
-  .details-row .value .src {
-    display: block;
-    font-size: var(--s-size);
-    color: var(--text-muted);
-    margin-top: var(--gap-xs);
-  }  .details-scale .arrow,
-  .details-row .arrow { color: var(--text-muted); padding: 0 2px; }
   .details-description {
     font-size: var(--m-size);
     line-height: 1.5;
@@ -303,8 +283,6 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .issue-type-icon { color: var(--text-muted); flex-shrink: 0; display: block; }
-  .issue-legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; margin-top: var(--gap-xs); }
-  .t-clipped .issue-legend-dot { background: var(--clipped-color); }
   /* Divider between adjacent rows comes from border-bottom on .buttonList */
   .issue-meta { flex: 1; min-width: 0; }
   .issue-primary {
