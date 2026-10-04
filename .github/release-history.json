@@ -1,0 +1,19 @@
+{
+  "_note": "The tags and releases this plugin had in rms-ds-figma-plugins, re-created here by the bootstrap-releases workflow (once each).",
+  "tags": [
+    {
+      "tag": "v6",
+      "commit": "39ef87a18d25e2919f2264adec0d48b03db09b54",
+      "message": "font-scaling-lab v6"
+    },
+    {
+      "tag": "v7",
+      "commit": "0446de39d03132073f40dded6db0d1b7ca8677ec",
+      "message": "font-scaling-lab v7",
+      "release": {
+        "title": "Font Scaling Lab v7",
+        "notes": "- Improved clipping detection to identify the underlying cause.\n- Layers outside the selected frame are now flagged in the list.\n- Added more precise fix suggestions and support for additional use cases."
+      }
+    }
+  ]
+}
