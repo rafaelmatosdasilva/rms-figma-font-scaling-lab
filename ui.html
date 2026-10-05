@@ -33,8 +33,8 @@
       linear-gradient(45deg, rgba(0,0,0,0.04) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.04) 75%);
     background-size: 16px 16px;
     background-position: 0 0, 8px 8px;
-    border: var(--thickness) solid var(--border);
-    border-radius: var(--radius-tooltip);
+    border: var(--general-thickness) solid var(--dividerLine-border);
+    border-radius: var(--radii-tooltip);
     min-height: 100px;
     cursor: grab;
     user-select: none;
@@ -100,7 +100,7 @@
     position: absolute;
     background: var(--clipped-color);
     color: var(--clipped-text);
-    font-size: var(--s-size);
+    font-size: var(--typography-s-font-size);
     font-weight: 500;
     letter-spacing: 0.2px;
     height: var(--button-min-height);
@@ -134,12 +134,12 @@
     /* DS tooltipPopover (821:72473): 4/8 padding, radii/tooltip, 1.5px border,
        10px/700 label. Was a hand-rolled chip on a hardcoded translucent black. */
     background: var(--tooltipPopover-background);
-    border: var(--thickness) solid var(--tooltipPopover-border);
+    border: var(--general-thickness) solid var(--tooltipPopover-border);
     color: var(--tooltipPopover-text);
-    font-size: var(--s-size);
-    font-weight: var(--s-weight);
+    font-size: var(--typography-s-font-size);
+    font-weight: var(--typography-s-font-weight);
     padding: var(--padding-xs) var(--padding-s);
-    border-radius: var(--radius-tooltip);
+    border-radius: var(--radii-tooltip);
     pointer-events: none;
     white-space: nowrap;
     opacity: 1;
@@ -194,9 +194,9 @@
   .details-header-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--gap-m); }
   .details-title-row { display: flex; align-items: center; gap: var(--gap-m); }
   .details-title {
-    font-size: var(--l-size);
-    font-weight: var(--m-weight);
-    color: var(--text);
+    font-size: var(--typography-l-font-size);
+    font-weight: var(--typography-m-font-weight);
+    color: var(--semantic-content-primary);
     word-break: break-word;
   }
   .details-close { margin-top: var(--gap-xs); }  #details-focus {
@@ -208,15 +208,15 @@
     padding: var(--padding-s) 0;
   }
   .details-section h4 {
-    font-size: var(--s-size);
+    font-size: var(--typography-s-font-size);
     color: var(--text-muted);
     margin: 0 0 var(--gap-s) 0;
-    font-weight: var(--m-weight);
+    font-weight: var(--typography-m-font-weight);
   }
   .details-description {
-    font-size: var(--m-size);
+    font-size: var(--typography-m-font-size);
     line-height: 1.5;
-    color: var(--text);
+    color: var(--semantic-content-primary);
     font-weight: 500;
     margin-top: var(--gap-s);
   }
@@ -224,10 +224,10 @@
   /* Suggested Fixes */
   .details-fixes-header {
     /* DS "Suggested Fixes" heading (505:50913): semantic/content/secondary (N300), size s.
-       Was --text (N100, primary) at m-size — too bright and a step too large. */
-    font-size: var(--s-size);
-    font-weight: var(--s-weight);
-    color: var(--text-secondary);
+       Was --semantic-content-primary (N100, primary) at m-size — too bright and a step too large. */
+    font-size: var(--typography-s-font-size);
+    font-weight: var(--typography-s-font-weight);
+    color: var(--semantic-content-secondary);
     margin: 0;
   }
   .fix-row {
@@ -235,8 +235,8 @@
     gap: var(--gap-m);
     padding: var(--padding-m) 0;
     border-top: none;
-    background-image: linear-gradient(var(--border), var(--border));  /* dividerLine (N700 both modes) — horizontal row separator */
-    background-size: 24px var(--thickness);
+    background-image: linear-gradient(var(--dividerLine-border), var(--dividerLine-border));  /* dividerLine (N700 both modes) — horizontal row separator */
+    background-size: 24px var(--general-thickness);
     background-repeat: no-repeat;
     background-position: 24px 0;
   }
@@ -257,11 +257,11 @@
     margin-bottom: 2px;
   }
   .fix-title {
-    font-size: var(--m-size);
-    font-weight: var(--m-weight);
-    color: var(--text);
+    font-size: var(--typography-m-font-size);
+    font-weight: var(--typography-m-font-weight);
+    color: var(--semantic-content-primary);
   }  .fix-desc {
-    font-size: var(--m-size);
+    font-size: var(--typography-m-font-size);
     color: var(--text-muted);
     line-height: 1.4;
   }
@@ -272,7 +272,7 @@
   .issues-list { display: flex; flex-direction: column; }
 
   .issue-group { display: flex; flex-direction: column; }
-  .issue-group + .issue-group { border-top: var(--thickness) solid var(--border); }  /* dividerLine (N700 both modes) */
+  .issue-group + .issue-group { border-top: var(--general-thickness) solid var(--dividerLine-border); }  /* dividerLine (N700 both modes) */
   .issue-group-header {
     display: flex; align-items: center; gap: var(--gap-m);
     padding: var(--padding-s) 0 var(--padding-s);
@@ -287,7 +287,7 @@
   .issue-meta { flex: 1; min-width: 0; }
   .issue-primary {
     display: flex; align-items: center; gap: var(--gap-m);
-    font-size: var(--m-size); color: var(--text);
+    font-size: var(--typography-m-font-size); color: var(--semantic-content-primary);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   /* DS buttonList (1921:44549): the tooltipButton sits FLUSH after the title. Cancel the
@@ -306,12 +306,12 @@
     justify-content: center;
     gap: var(--gap-m);
     padding: var(--padding-xl) 0;
-    color: var(--text);
-    font-size: var(--m-size);
+    color: var(--semantic-content-primary);
+    font-size: var(--typography-m-font-size);
     font-weight: 500;
     text-align: center;
   }
-  .no-issues svg { color: var(--text-secondary); }
+  .no-issues svg { color: var(--semantic-content-secondary); }
 
   /* Frame name inside focus button */
   .frame-name {
@@ -327,7 +327,7 @@
   /* Vertically center all action bar items */
 
   #gen-btn { justify-content: center; width: var(--button-min-height); padding: 0; }
-  #gen-btn:disabled, #gen-btn:disabled:hover { opacity: 0.24; background: var(--buttonPrimary-background); color: var(--buttonPrimary-text); cursor: not-allowed; }
+  #gen-btn:disabled, #gen-btn:disabled:hover { opacity: 0.24; background: var(--buttonPrimary-background); color: var(--buttonPrimary-iconText); cursor: not-allowed; }
 
   /* Scale stepper */
   #scale-stepper { display: flex; align-items: center; gap: var(--gap-s); }
@@ -339,14 +339,14 @@
     width: 58px; height: var(--button-min-height);
     text-align: center;
     /* DS input geometry + colour: general/thickness (1.5px) and input/border/default.
-       Was 1.2px (the icon-stroke token's value) against --border (dividerLine), which
+       Was 1.2px (the icon-stroke token's value) against --dividerLine-border (dividerLine), which
        matches in light but is one ramp step too dark in dark mode. */
-    border: var(--thickness) solid var(--input-border);
-    border-radius: var(--radius-full);
+    border: var(--general-thickness) solid var(--input-border);
+    border-radius: var(--radii-input);
     background: transparent;
-    color: var(--text);
-    font-size: var(--m-size);
-    font-weight: var(--m-weight);
+    color: var(--semantic-content-primary);
+    font-size: var(--typography-m-font-size);
+    font-weight: var(--typography-m-font-weight);
     font-family: inherit;
     outline: none;
     padding: 0 var(--padding-xs);
