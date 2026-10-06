@@ -28,6 +28,8 @@ Landed since publishing, and going out with the next Community release:
   the panel. The old bar stayed on screen after the problem had passed.
 - Dark mode colours updated against the design system. The greys shifted slightly
   across the whole ramp, so panels, borders and text all move together.
+- The scale stepper, the issue highlight and the suggested fixes are the design system's own
+  stepper, input, highlight selector, highlight and list rows, so they match the design exactly.
 - The scale field's border was too dim in dark mode and slightly too thin, and its
   focus ring used a text colour instead of the design system's focus colour.
 - Spacing throughout the issue list and details panel snapped onto the design
