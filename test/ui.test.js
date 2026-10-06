@@ -170,6 +170,31 @@ describe('font-scaling-lab UI — preview', () => {
     expect(list.textContent).toMatch(/Clipped\s*·\s*1/);
   });
 
+  it('draws issues and fixes with the system\'s components, nothing of its own', async () => {
+    ui = loadUI(UI);
+    ui.receive({ type: 'selection', data: selection() });
+    ui.receive(previewResult({
+      issues: [{
+        type: 'clipped', severity: 'clipped', name: 'Heading', chars: 'Welcome', parentName: 'Card',
+        bounds: { x: 0, y: 0, w: 100, h: 20 }, nodeId: 't1', outOfBounds: false, kind: 'TEXT',
+        reasons: [{ what: 'Fixed size', fix: 'Hug' }], description: 'Heading is clipped',
+        suggestedFixes: [
+          { title: 'Set text resize to Hug', description: 'Grows with content', recommended: true, nodeId: 't1' },
+          { title: 'Set parent width to Hug', description: 'Container sizes to text' },
+        ],
+      }],
+    }));
+    await new Promise((r) => setTimeout(r, 50));
+    // The box over the preview is the system's highlightSelector, its label the system's highlight.
+    expect(ui.$$('#issue-overlays .issue-overlay.highlightSelector').length).toBe(1);
+    expect(ui.$$('.overlay-label.highlight').length).toBe(1);
+    // Each suggested fix is the system's listItem, a dividerLine between them.
+    ui.click('.issue-item');
+    expect(ui.$$('.details-fixes-section .listItem').length).toBe(2);
+    expect(ui.$$('.details-fixes-section .listItem-divider').length).toBe(1);
+    expect(ui.$$('.fix-row').length).toBe(0);
+  });
+
   it('surfaces a preview failure', () => {
     ui = loadUI(UI);
     ui.receive({ type: 'error', message: 'Preview failed: boom' });

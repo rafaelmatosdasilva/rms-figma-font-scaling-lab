@@ -11,14 +11,10 @@
   /* Plugin-local vars — no DS token equivalent */
   :root {
     --canvas-bg: #E6E6E6;
-    --clipped-color: #DB0000;
-    --clipped-text: #FFFFFF;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --canvas-bg: #1F1F1F;
-      --clipped-color: #FE6767;
-      --clipped-text: #171717;
     }
   }
 
@@ -64,24 +60,10 @@
   /* Issue overlays — HTML rectangles drawn directly over the preview image.
      Always visible with a 2px coloured border; hover adds an outer glow ring. */
   #issue-overlays { position: absolute; top: 0; left: 0; pointer-events: none; }
-  .issue-overlay {
-    position: absolute; box-sizing: border-box;
-    border: 2px solid transparent;
-    pointer-events: all;
-    cursor: default;
-  }
+  /* Each issue is the system's highlightSelector (its border, fill and selected ring), placed over the
+     element it marks; .active also sets the system's .selected. Only placement and behaviour are here. */
+  .issue-overlay { position: absolute; pointer-events: all; cursor: default; }
   .issue-overlay[data-nid] { cursor: pointer; }
-  .issue-overlay.t-clipped {
-    border-color: var(--clipped-color);
-    background: rgba(219, 0, 0, 0.25);
-  }
-  .issue-overlay.t-clipped.active { box-shadow: 0 0 0 4px rgba(219,0,0,0.35); }
-  @media (prefers-color-scheme: dark) {
-    .issue-overlay.t-clipped {
-      background: rgba(254, 103, 103, 0.25);
-    }
-    .issue-overlay.t-clipped.active { box-shadow: 0 0 0 4px rgba(254,103,103,0.35); }
-  }
   .issue-overlay.dimmed { opacity: 0.15; transition: opacity 0.15s; }
   /* When a highlight is pinned, hide every other highlight (overlay + label)
      so the focus is exclusively on the selected one. */
@@ -96,20 +78,10 @@
     pointer-events: none;
     overflow: visible;
   }
+  /* Each label is the system's highlight (its fill, text and icon); placement, width limit and fading here. */
   .overlay-label {
     position: absolute;
-    background: var(--clipped-color);
-    color: var(--clipped-text);
-    font-size: var(--typography-s-font-size);
-    font-weight: 500;
-    letter-spacing: 0.2px;
-    height: var(--button-min-height);
     max-width: 200px;
-    padding: 0 var(--padding-s) 0 var(--padding-xs);
-    gap: var(--gap-s);
-    border-radius: 0;
-    display: flex;
-    align-items: center;
     white-space: nowrap;
     overflow: hidden;
     pointer-events: none;
@@ -230,41 +202,9 @@
     color: var(--semantic-content-secondary);
     margin: 0;
   }
-  .fix-row {
-    display: flex;
-    gap: var(--gap-m);
-    padding: var(--padding-m) 0;
-    border-top: none;
-    background-image: linear-gradient(var(--dividerLine-border), var(--dividerLine-border));  /* dividerLine (N700 both modes) — horizontal row separator */
-    background-size: 24px var(--general-thickness);
-    background-repeat: no-repeat;
-    background-position: 24px 0;
-  }
-  .details-fixes-header + .fix-row { background: none; padding-top: var(--padding-l); }
-  .fix-row:last-child { padding-bottom: 0; }
   .details-section + .details-section.details-fixes-section { border-top: none; }
-  .details-fixes-section { padding-bottom: 0; }
-  .fix-icon {
-    flex-shrink: 0;
-    color: var(--text-muted);
-    margin-top: var(--gap-xs);
-  }
-  .fix-body { flex: 1; min-width: 0; }
-  .fix-title-row {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-m);
-    margin-bottom: 2px;
-  }
-  .fix-title {
-    font-size: var(--typography-m-font-size);
-    font-weight: var(--typography-m-font-weight);
-    color: var(--semantic-content-primary);
-  }  .fix-desc {
-    font-size: var(--typography-m-font-size);
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
+  /* The fixes are the system's listItem, spaced at gap/l as Figma's Suggestions list. */
+  .details-fixes-section { display: flex; flex-direction: column; gap: var(--gap-l); padding-bottom: 0; }
   .fix-action {
     margin-top: var(--gap-m);
   }
@@ -329,33 +269,7 @@
   #gen-btn { justify-content: center; width: var(--button-min-height); padding: 0; }
   #gen-btn:disabled, #gen-btn:disabled:hover { opacity: 0.24; background: var(--buttonPrimary-background); color: var(--buttonPrimary-iconText); cursor: not-allowed; }
 
-  /* Scale stepper */
-  #scale-stepper { display: flex; align-items: center; gap: var(--gap-s); }
-  .scale-step-btn {
-    border-radius: 50%;
-  }
-  .scale-step-btn:disabled { opacity: 0.24; cursor: not-allowed; }
-  #scale-input {
-    width: 58px; height: var(--button-min-height);
-    text-align: center;
-    /* DS input geometry + colour: general/thickness (1.5px) and input/border/default.
-       Was 1.2px (the icon-stroke token's value) against --dividerLine-border (dividerLine), which
-       matches in light but is one ramp step too dark in dark mode. */
-    border: var(--general-thickness) solid var(--input-border);
-    border-radius: var(--radii-input);
-    background: transparent;
-    color: var(--semantic-content-primary);
-    font-size: var(--typography-m-font-size);
-    font-weight: var(--typography-m-font-weight);
-    font-family: inherit;
-    outline: none;
-    padding: 0 var(--padding-xs);
-    cursor: default;
-  }
-  #scale-input:focus {
-    border-color: var(--input-border-focus); /* DS input/border/focus — was --text-muted */
-    cursor: text;
-  }
+  /* Scale stepper: the system's buttonStepper (two buttonSecondary and its input), nothing of its own. */
 
 </style>
 </head>
@@ -386,14 +300,10 @@
       <span id="frame-name" class="frame-name"></span>
       <svg width="16" height="16" style="flex-shrink:0;"><use href="#icon-focus"/></svg>
     </button>
-    <div id="scale-stepper" style="margin-left:auto;">
-      <button id="scale-dec" class="buttonSecondary scale-step-btn" aria-label="Decrease scale">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2.5" y1="6" x2="9.5" y2="6"/></svg>
-      </button>
-      <input id="scale-input" type="text" value="125%" inputmode="numeric" autocomplete="off" spellcheck="false" />
-      <button id="scale-inc" class="buttonSecondary scale-step-btn" aria-label="Increase scale">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="2.5" x2="6" y2="9.5"/><line x1="2.5" y1="6" x2="9.5" y2="6"/></svg>
-      </button>
+    <div id="scale-stepper" class="buttonStepper" style="margin-left:auto;">
+      <button id="scale-dec" class="buttonSecondary" aria-label="Decrease scale"><svg width="16" height="16"><use href="#icon-minus"/></svg></button>
+      <div class="inputWrap"><input id="scale-input" class="inputField" type="text" value="125%" inputmode="numeric" autocomplete="off" spellcheck="false" aria-label="Scale"/></div>
+      <button id="scale-inc" class="buttonSecondary" aria-label="Increase scale"><svg width="16" height="16"><use href="#icon-plus"/></svg></button>
     </div>
     <button id="gen-btn" class="buttonPrimary buttonRescan" data-tip="Generate preview" style="margin-left:var(--gap-m);">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -786,7 +696,7 @@
       const b = issues[i].bounds;
       if (!b) continue;
       const el = document.createElement('div');
-      el.className = 'issue-overlay t-' + issues[i].type;
+      el.className = 'issue-overlay highlightSelector t-' + issues[i].type;
       el.dataset.iid = i;
       if (issues[i].nodeId) el.dataset.nid = issues[i].nodeId;
       el.style.left   = (b.x / refW * 100) + '%';
@@ -797,7 +707,7 @@
 
       // Label lives outside zoom-canvas — never blurs at any zoom
       const lbl = document.createElement('div');
-      lbl.className = 'overlay-label';
+      lbl.className = 'overlay-label highlight';
       lbl.dataset.iid = i;
       if (issues[i].nodeId) lbl.dataset.nid = issues[i].nodeId;
       const badgeText = issues[i].chars || issues[i].name || issues[i].parentName || '';
@@ -1078,7 +988,7 @@
   function setActiveIid(iid) {
     document.querySelectorAll('.issue-overlay').forEach(o => {
       const match = o.dataset.iid === iid;
-      o.classList.toggle('active', match);
+      o.classList.toggle('active', match); o.classList.toggle('selected', match);
       o.classList.toggle('dimmed', !match);
     });
     document.querySelectorAll('.overlay-label').forEach(lbl => {
@@ -1099,7 +1009,7 @@
   }
   function clearActive() {
     document.querySelectorAll('.issue-overlay').forEach(o => {
-      o.classList.remove('active', 'dimmed');
+      o.classList.remove('active', 'selected', 'dimmed');
     });
     document.querySelectorAll('.overlay-label').forEach(lbl => lbl.classList.remove('active'));
     document.querySelectorAll('.issue-item').forEach(item => item.classList.remove('hovered', 'selected'));
@@ -1109,7 +1019,7 @@
   function clearPin() {
     if (pinnedIid == null) return;
     pinnedIid = null;
-    document.querySelectorAll('.issue-overlay').forEach(o => o.classList.remove('active', 'dimmed'));
+    document.querySelectorAll('.issue-overlay').forEach(o => o.classList.remove('active', 'selected', 'dimmed'));
     document.querySelectorAll('.overlay-label').forEach(lbl => lbl.classList.remove('active', 'pinned'));
     document.querySelectorAll('.issue-item').forEach(item => item.classList.remove('hovered', 'selected'));
     const zw = document.getElementById('zoom-wrap');
@@ -1172,12 +1082,13 @@
       for (var fi = 0; fi < iss.suggestedFixes.length; fi++) {
         var fix = iss.suggestedFixes[fi];
         var iconHref = fixIconHref(fix.title);
-        fixesHtml += '<div class="fix-row">'
-                  +   '<svg class="fix-icon" width="14" height="14"><use href="' + iconHref + '"/></svg>'
-                  +   '<div class="fix-body">'
-                  +     '<div class="fix-title-row"><span class="fix-title">' + esc(fix.title) + '</span></div>'
-                  +     '<div class="fix-desc">' + esc(fix.description) + '</div>'
+        // The system's listItem: its icon, title and description, a dividerLine under each but the last.
+        fixesHtml += '<div class="listItem">'
+                  +   '<div class="listItem-row">'
+                  +     '<span class="listItem-icon"><svg width="16" height="16"><use href="' + iconHref + '"/></svg></span>'
+                  +     '<div class="listItem-main"><span class="listItem-title">' + esc(fix.title) + '</span><span class="listItem-desc">' + esc(fix.description) + '</span></div>'
                   +   '</div>'
+                  +   (fi < iss.suggestedFixes.length - 1 ? '<div class="dividerLine listItem-divider"></div>' : '')
                   + '</div>';
       }
       html += '<div class="details-section details-fixes-section">'
