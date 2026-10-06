@@ -158,6 +158,8 @@
     min-width: 0;
   }
   #details-panel.open { width: 260px; }
+  /* Closed, the details panel is 0 wide: its padding/l goes with it. */
+  #details-panel:not(.open) { padding-left: 0; padding-right: 0; }
   #details-panel:not(.open) .panel-resize { display: none; }
   .details-type-icon { color: var(--text-muted); flex-shrink: 0; display: block; }
   .details-header-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--gap-m); }
