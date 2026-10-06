@@ -30,6 +30,8 @@ Landed since publishing, and going out with the next Community release:
   across the whole ramp, so panels, borders and text all move together.
 - The scale stepper, the issue highlight and the suggested fixes are the design system's own
   stepper, input, highlight selector, highlight and list rows, so they match the design exactly.
+- The issues list and the details panel are the design system's panel, and the close and
+  generate buttons use its close and refresh icons.
 - The scale field's border was too dim in dark mode and slightly too thin, and its
   focus ring used a text colour instead of the design system's focus colour.
 - Spacing throughout the issue list and details panel snapped onto the design
