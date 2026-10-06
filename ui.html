@@ -161,7 +161,7 @@
     min-width: 0;
   }
   #details-panel.open { width: 260px; }
-  #details-panel:not(.open) .sidePanelResize { display: none; }
+  #details-panel:not(.open) .panel-resize { display: none; }
   .details-type-icon { color: var(--text-muted); flex-shrink: 0; display: block; }
   .details-header-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--gap-m); }
   .details-title-row { display: flex; align-items: center; gap: var(--gap-m); }
@@ -305,14 +305,7 @@
       <div class="inputWrap"><input id="scale-input" class="inputField" type="text" value="125%" inputmode="numeric" autocomplete="off" spellcheck="false" aria-label="Scale"/></div>
       <button id="scale-inc" class="buttonSecondary" aria-label="Increase scale"><svg width="16" height="16"><use href="#icon-plus"/></svg></button>
     </div>
-    <button id="gen-btn" class="buttonPrimary buttonRescan" data-tip="Generate preview" style="margin-left:var(--gap-m);">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1.5 6A4.5 4.5 0 0 1 9 2.5l1-1"/>
-        <path d="M10.5 6A4.5 4.5 0 0 1 3 9.5l-1 1"/>
-        <polyline points="9.5,1 10.5,3.5 8,3.5"/>
-        <polyline points="2.5,11 1.5,8.5 4,8.5"/>
-      </svg>
-    </button>
+    <button id="gen-btn" class="buttonPrimary buttonRescan" data-tip="Generate preview" aria-label="Generate preview" style="margin-left:var(--gap-m);"><svg width="16" height="16"><use href="#icon-update"/></svg></button>
   </div>
   <div class="dividerLine"></div>
 
@@ -321,9 +314,9 @@
     <div class="content-row">
 
       <!-- Issues sidebar (left, resizable, hidden until first generate) -->
-      <div id="issues-panel" class="sidePanel sidePanel--left" style="display:none;">
-        <div class="issues-list sidePanelBody" id="issues-list"></div>
-        <div id="panel-resize-handle" class="sidePanelResize"></div>
+      <div id="issues-panel" class="panel panel--resizable" style="display:none;">
+        <div class="issues-list panel-main" id="issues-list"></div>
+        <div id="panel-resize-handle" class="panel-resize"></div>
       </div>
 
       <!-- Preview (right, flex:1, hidden until first generate) -->
@@ -344,22 +337,18 @@
           <div class="zoom-hint" id="zoom-hint">Scroll to zoom · Drag to pan</div>
         </div>
         <!-- Details panel for the pinned highlight -->
-        <aside id="details-panel" class="sidePanel sidePanel--right">
-          <div class="sidePanelResize" id="details-resize-handle"></div>
-          <div class="sidePanelHeader details-header">
+        <aside id="details-panel" class="panel panel--resizable panel--right">
+          <div class="panel-resize" id="details-resize-handle"></div>
+          <div class="panel-head details-header">
             <div class="details-header-text">
               <div class="details-title-row">
                 <svg class="details-type-icon" id="details-type-icon" width="16" height="16"><use href="#icon-object-frame"/></svg>
                 <span class="details-title" id="details-title"></span>
               </div>
             </div>
-            <button class="buttonSecondary details-close" id="details-close">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/>
-              </svg>
-            </button>
+            <button class="buttonSecondary details-close" id="details-close" aria-label="Close details"><svg width="16" height="16"><use href="#icon-cross"/></svg></button>
           </div>
-          <div class="sidePanelBody" id="details-body"></div>
+          <div class="panel-main" id="details-body"></div>
         </aside>
       </div>
 
@@ -1230,11 +1219,11 @@
     if (panel.classList.contains('open')) panel.style.width = clamped + 'px';
   }
 
-  initSidePanelResize(document.getElementById('issues-panel'), {
+  initPanelResize(document.getElementById('issues-panel'), {
     min: 120, max: 400, defaultWidth: 200,
     onSave: w => parent.postMessage({ pluginMessage: { type: 'save-panel-width', width: w } }, '*')
   });
-  initSidePanelResize(document.getElementById('details-panel'), {
+  initPanelResize(document.getElementById('details-panel'), {
     defaultWidth: 260,
     onDrag: w => applyDetailsWidth(w),
     onSave: w => parent.postMessage({ pluginMessage: { type: 'save-details-width', width: w } }, '*')
