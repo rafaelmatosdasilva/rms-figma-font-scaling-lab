@@ -217,21 +217,19 @@
     padding: var(--padding-s) 0 var(--padding-s);
     cursor: pointer; user-select: none; -webkit-user-select: none;
   }  .dividerSection + .issue-item { margin-top: 0; }
-  .issue-primary > span.txt {
+  /* The row's own button holds its title (the system's buttonList-main), in the title's colour. */
+  .buttonList.issue-item > .buttonList-main { color: var(--semantic-content-primary); }
+  .issue-item .buttonList-main > span.txt {
     min-width: 0;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .issue-type-icon { color: var(--text-muted); flex-shrink: 0; display: block; }
   /* Divider between adjacent rows comes from border-bottom on .buttonList */
-  .issue-meta { flex: 1; min-width: 0; }
-  .issue-primary {
-    display: flex; align-items: center; gap: var(--gap-m);
-    font-size: var(--typography-m-font-size); color: var(--semantic-content-primary);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
+  /* The type icon sits gap/m before the title (the row's own gap is gap/s). */
+  .issue-item > .issue-type-icon { margin-right: calc(var(--gap-m) - var(--gap-s)); }
   /* DS buttonList (1921:44549): the tooltipButton sits FLUSH after the title. Cancel the
-     .issue-primary gap before it so it hugs the label; its 24px box gives the visual space. */
-  .issue-primary .tooltipButton { margin-left: calc(-1 * var(--gap-m)); }
+     row's gap before it so it hugs the label; its 24px box gives the visual space. */
+  .issue-item > .buttonList-main + .tooltipButton { margin-left: calc(-1 * var(--gap-s)); }
   .issue-preview-center {
     width: var(--button-min-height);
     padding: 0;
@@ -615,13 +613,9 @@
           + '</button>'
           : '';
         html += '<div class="buttonList issue-item t-' + iss.type + '" data-iid="' + ii + '">'
-              + '<div class="issue-meta">'
-              + '<div class="issue-primary">'
-              +   '<svg class="issue-type-icon" width="' + typeSize + '" height="' + typeSize + '"><use href="' + typeHref + '"/></svg>'
-              +   '<span class="txt">' + esc(primary) + '</span>'
-              +   clippedInfo
-              + '</div>'
-              + '</div>'
+              + '<svg class="issue-type-icon" width="' + typeSize + '" height="' + typeSize + '"><use href="' + typeHref + '"/></svg>'
+              + '<button type="button" class="buttonList-main"><span class="txt">' + esc(primary) + '</span></button>'
+              + clippedInfo
               + previewBtn
               + '<svg width="16" height="16" class="buttonList-arrow"><use href="#icon-arrow-right"/></svg>'
               + '</div>';

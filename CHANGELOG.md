@@ -5,6 +5,10 @@ A design system update is committed without a release (`build: ds-core vX.Y.Z`) 
 
 (Some earlier entries use decimals like `v5.1` for repo-only releases. That scheme was retired on 22 July 2026.)
 
+### Not released yet
+
+- The issues list works from the keyboard: Tab reaches each issue, and Enter or Space selects it.
+
 ### v7 · 1 August 2026
 
 - Improved clipping detection to identify the underlying cause.
