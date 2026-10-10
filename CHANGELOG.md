@@ -7,6 +7,7 @@ A design system update is committed without a release (`build: ds-core vX.Y.Z`) 
 
 ### Not released yet
 
+- An issue row is spaced as the design system's list row: its type icon sits closer to its title, its info button right after the title, and its title is in the list's own colour.
 - The issues list works from the keyboard: Tab reaches each issue, and Enter or Space selects it.
 
 ### v7 · 1 August 2026
