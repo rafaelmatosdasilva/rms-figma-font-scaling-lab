@@ -7,6 +7,9 @@ A design system update is committed without a release (`build: ds-core vX.Y.Z`) 
 
 ### Not released yet
 
+- The details panel is spaced as in the design: the title on the system's large line height, the description and Suggested Fixes on the system's text styles, and the description right under the title.
+- The selected issue in the list shows its name: the row's highlight was drawn over it.
+- Rendering the preview shows the design system's loader over the page, as in the design.
 - The Scan selection button says what it does, as in the design, with the design system's update icon, 8px after the scale stepper.
 - One line under the bar at the top, as in the design: the bar draws it, so the second line under it is gone.
 - The issues list and the details panel are 240px wide each, as in the design.

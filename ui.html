@@ -169,6 +169,7 @@
   .details-title-row { display: flex; align-items: center; gap: var(--gap-m); }
   .details-title {
     font-size: var(--typography-l-font-size);
+    line-height: var(--typography-l-line-height);
     font-weight: var(--typography-m-font-weight);
     color: var(--semantic-content-primary);
     word-break: break-word;
@@ -178,9 +179,8 @@
     padding: 0 var(--padding-s);
     white-space: nowrap;
   }
-  .details-section {
-    padding: var(--padding-s) 0;
-  }
+  /* Figma's Main Content: the description, the fixes and View on Canvas, gap/xl apart, right under the head. */
+  .details-section + .details-section { margin-top: var(--gap-xl); }
   .details-section h4 {
     font-size: var(--typography-s-font-size);
     color: var(--text-muted);
@@ -189,7 +189,7 @@
   }
   .details-description {
     font-size: var(--typography-m-font-size);
-    line-height: 1.5;
+    line-height: var(--typography-m-line-height);
     color: var(--semantic-content-primary);
     font-weight: 500;
     margin-top: var(--gap-s);
@@ -201,15 +201,13 @@
        Was --semantic-content-primary (N100, primary) at m-size — too bright and a step too large. */
     font-size: var(--typography-s-font-size);
     font-weight: var(--typography-s-font-weight);
+    line-height: var(--typography-s-line-height);
     color: var(--semantic-content-secondary);
     margin: 0;
   }
   .details-section + .details-section.details-fixes-section { border-top: none; }
   /* The fixes are the system's listItem, spaced at gap/l as Figma's Suggestions list. */
-  .details-fixes-section { display: flex; flex-direction: column; gap: var(--gap-l); padding-bottom: 0; }
-  .fix-action {
-    margin-top: var(--gap-m);
-  }
+  .details-fixes-section { display: flex; flex-direction: column; gap: var(--gap-l); }
 
   .issues-list { display: flex; flex-direction: column; }
   /* Each section's header sits gap/m above its rows, as Figma lays out the list. */
