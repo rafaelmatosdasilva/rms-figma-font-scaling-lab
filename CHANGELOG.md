@@ -7,6 +7,10 @@ A design system update is committed without a release (`build: ds-core vX.Y.Z`) 
 
 ### Not released yet
 
+- The Scan selection button says what it does, as in the design, with the design system's update icon, 8px after the scale stepper.
+- One line under the bar at the top, as in the design: the bar draws it, so the second line under it is gone.
+- The issues list and the details panel are 240px wide each, as in the design.
+- Each section of the issues list sits 8px above its rows, as in the design.
 - An issue row is spaced as the design system's list row: its type icon sits closer to its title, its info button right after the title, and its title is in the list's own colour.
 - The issues list works from the keyboard: Tab reaches each issue, and Enter or Space selects it.
 
