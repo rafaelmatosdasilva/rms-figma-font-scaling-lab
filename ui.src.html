@@ -130,7 +130,7 @@
     min-height: 0;
   }
   #issues-panel {
-    width: 200px;
+    width: 240px;   /* Figma's panel, 240 */
     min-height: 0;
     overflow-x: hidden;
     min-width: 120px;
@@ -157,7 +157,7 @@
     width: 0;
     min-width: 0;
   }
-  #details-panel.open { width: 260px; }
+  #details-panel.open { width: 240px; }   /* Figma's panel, 240 */
   /* Closed, the details panel is 0 wide: its padding/l goes with it. */
   #details-panel:not(.open) { padding-left: 0; padding-right: 0; }
   #details-panel:not(.open) .panel-resize { display: none; }
@@ -209,6 +209,8 @@
   }
 
   .issues-list { display: flex; flex-direction: column; }
+  /* Each section's header sits gap/m above its rows, as Figma lays out the list. */
+  .issues-list > .dividerSection { margin-bottom: var(--gap-m); }
 
   .issue-group { display: flex; flex-direction: column; }
   .issue-group + .issue-group { border-top: var(--general-thickness) solid var(--dividerLine-border); }  /* dividerLine (N700 both modes) */
@@ -256,7 +258,6 @@
 
   /* Vertically center all action bar items */
 
-  #gen-btn { justify-content: center; width: var(--button-min-height); padding: 0; }
   #gen-btn:disabled, #gen-btn:disabled:hover { opacity: 0.24; background: var(--buttonPrimary-background); color: var(--buttonPrimary-iconText); cursor: not-allowed; }
 
   /* Scale stepper: the system's buttonStepper (two buttonSecondary and its input), nothing of its own. */
@@ -295,9 +296,8 @@
       <div class="inputWrap"><input id="scale-input" class="inputField" type="text" value="125%" inputmode="numeric" autocomplete="off" spellcheck="false" aria-label="Scale"/></div>
       <button id="scale-inc" class="buttonSecondary" aria-label="Increase scale"><svg width="16" height="16"><use href="#icon-plus"/></svg></button>
     </div>
-    <button id="gen-btn" class="buttonPrimary buttonRescan" data-tip="Generate preview" aria-label="Generate preview" style="margin-left:var(--gap-m);"><svg width="16" height="16"><use href="#icon-update"/></svg></button>
+    <button id="gen-btn" class="buttonPrimary" style="margin-left:var(--gap-m);"><span>Scan selection</span><svg width="16" height="16"><use href="#icon-update"/></svg></button>
   </div>
-  <div class="dividerLine" role="separator"></div>
 
   <!-- Scrollable results -->
   <div class="scroll-area" style="margin:0 -16px; padding:0; flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden;">
@@ -427,12 +427,8 @@
   });
 
   // ── Helpers ───────────────────────────────────────────────────────────
-  const GEN_ICON = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6A4.5 4.5 0 0 1 9 2.5l1-1"/><path d="M10.5 6A4.5 4.5 0 0 1 3 9.5l-1 1"/><polyline points="9.5,1 10.5,3.5 8,3.5"/><polyline points="2.5,11 1.5,8.5 4,8.5"/></svg>`;
-  const GEN_SPIN = `<span class="toast-spinner" style="border-color:currentColor;border-top-color:transparent;opacity:1;width:10px;height:10px;"></span>`;
-
   function setGenerating(on) {
     if (on) genBtn.disabled = true;
-    genBtn.innerHTML = GEN_ICON;
 
     if (on) {
       generationCancelled = false;
@@ -1173,11 +1169,11 @@
   }
 
   initPanelResize(document.getElementById('issues-panel'), {
-    min: 120, max: 400, defaultWidth: 200,
+    min: 120, max: 400, defaultWidth: 240,
     onSave: w => parent.postMessage({ pluginMessage: { type: 'save-panel-width', width: w } }, '*')
   });
   initPanelResize(document.getElementById('details-panel'), {
-    defaultWidth: 260,
+    defaultWidth: 240,
     onDrag: w => applyDetailsWidth(w),
     onSave: w => parent.postMessage({ pluginMessage: { type: 'save-details-width', width: w } }, '*')
   });
